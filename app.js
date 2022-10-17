@@ -15,6 +15,15 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+mongoose.connect('mongodb://localhost:27017/blogsDB');
+
+const postSchema = new mongoose.Schema({
+    Title: String, 
+    Body: String
+  });
+
+  const Post = mongoose.model('Post', postSchema);
+
 app.get("/", function(req, res){
     res.render('home', {content: homeStartingContent});
 });
@@ -34,7 +43,16 @@ app.get("/compose", function(req, res){
 app.post("/compose", function(req, res){
     const postTitle = req.body.title;
     const postBody = req.body.body;
-})
+
+    const newPost = new Post ({
+        Title: postTitle, 
+        Body: postBody
+    });
+
+    newPost.save();
+
+    res.redirect("/")
+});
 
 app.listen(5000, function(){
     console.log("listening on port 3000");
