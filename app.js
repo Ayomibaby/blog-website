@@ -16,10 +16,26 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.get("/", function(req, res){
-    res.send('hello world');
+    res.render('home', {content: homeStartingContent});
 });
 
+app.get("/contact", function(req, res){
+    res.render('contact', {contact: contactContent});
+});
 
-app.listen(3000, function(){
+app.get("/about", function(req, res){
+    res.render('about', {about: aboutContent});
+});
+
+app.get("/compose", function(req, res){
+    res.render('compose');
+});
+
+app.post("/compose", function(req, res){
+    const postTitle = req.body.title;
+    const postBody = req.body.body;
+})
+
+app.listen(5000, function(){
     console.log("listening on port 3000");
 });
