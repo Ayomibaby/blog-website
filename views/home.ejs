@@ -2,4 +2,11 @@
 
 <p><%= content %></p>
 
+<% blogPosts.forEach(function(post){ %> 
+    <h1><%=  post.Title %></h1>
+
+    <p><%= post.Body.substring(0,100) + '...' %> <a href="">Read more</a></p>
+    
+<% }); %> 
+
 <%- include('partials/footer'); -%>

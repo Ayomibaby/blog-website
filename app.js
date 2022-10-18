@@ -25,10 +25,19 @@ const postSchema = new mongoose.Schema({
   const Post = mongoose.model('Post', postSchema);
 
 app.get("/", function(req, res){
-    res.render('home', {content: homeStartingContent});
+    Post.find(function(err, foundPosts){
+        if(err){
+            console.log(err)
+        }else{
+            res.render('home', {content: homeStartingContent, blogPosts: foundPosts});
+        }
+
+    })
+    
 });
 
 app.get("/contact", function(req, res){
+    
     res.render('contact', {contact: contactContent});
 });
 
