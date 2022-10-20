@@ -32,7 +32,7 @@ app.get("/", function(req, res){
             res.render('home', {content: homeStartingContent, blogPosts: foundPosts});
         }
 
-    })
+    });
     
 });
 
