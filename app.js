@@ -63,6 +63,17 @@ app.post("/compose", function(req, res){
     res.redirect("/")
 });
 
+app.get("/stories/:postId", function(req, res){
+    const postId = req.params.postId;
+
+    Post.findById(postId, function(err, post){
+        res.render('post', {
+            heading: post.Title,
+            body: post.Body
+        });
+    });
+});
+
 app.listen(5000, function(){
     console.log("listening on port 3000");
 });
